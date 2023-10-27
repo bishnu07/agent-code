@@ -1,0 +1,139 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="option_contracts_input" id="H!=%~x`}2!m|]sqvI*vi" x="310" y="-2910">
+    <value name="contractType">
+      <block type="enum_contractType" id="`wZx3{hRklAkqt6PU5z2">
+        <field name="String_Value">OPTNS</field>
+      </block>
+    </value>
+    <value name="contractRole">
+      <block type="enum_contractRole" id="f:X|OdQl^Q;2OnT18bv?">
+        <field name="String_Value">BUY</field>
+      </block>
+    </value>
+    <value name="contractID">
+      <block type="input_field_value" id="YR,h@.3-,/q|@GON{[lA">
+        <field name="String_Value">OPTNSX02</field>
+      </block>
+    </value>
+    <value name="currency">
+      <block type="enum_currency" id="TL2GNJ_1,du5_1HV:r|?">
+        <field name="String_Value">CHF</field>
+      </block>
+    </value>
+    <value name="maturityDate">
+      <block type="date_picker" id="QIX(]*Q]9Ob/1m%.;WSw">
+        <field name="FIELDNAME">2026-09-01</field>
+        <field name="String_Value">T23:59:59</field>
+      </block>
+    </value>
+    <value name="optionExerciseType">
+      <block type="input_field_value" id="8dXqn{fr]_T]}*L(AWaz">
+        <field name="String_Value">E</field>
+      </block>
+    </value>
+    <value name="optionExerciseEndDate">
+      <block type="date_picker" id="a9Vi]HBsR]Xch^{L+v3,">
+        <field name="FIELDNAME">2026-09-01</field>
+        <field name="String_Value">T23:59:59</field>
+      </block>
+    </value>
+    <value name="optionStrike1">
+      <block type="input_field_value" id="_`9$WcwS}4s74.N@{SX~">
+        <field name="String_Value">1050</field>
+      </block>
+    </value>
+    <value name="optionType">
+      <block type="input_field_value" id="e3t6[/EzGA$g?rFvXk=F">
+        <field name="String_Value">C</field>
+      </block>
+    </value>
+    <value name="creatorID">
+      <block type="input_field_value" id="y)jfbv_211[G_3=LG7i;">
+        <field name="String_Value">749aec3c-8b29-446c-986e-579417ed471d</field>
+      </block>
+    </value>
+    <value name="counterpartyID">
+      <block type="input_field_value" id="[KEFVU[-b.aCCcHk,:N;">
+        <field name="String_Value">ac792935-ab5a-41d0-96cd-718194ea944b</field>
+      </block>
+    </value>
+    <value name="contractDealDate">
+      <block type="date_picker" id="ZqsqL](oOK_[#P3*[x!q">
+        <field name="FIELDNAME">2023-08-31</field>
+        <field name="String_Value">T23:59:59</field>
+      </block>
+    </value>
+    <next>
+      <block type="swaps_optional3_purchaseDate" id="jp]Uca:OoT;=[i,{!dcp">
+        <value name="purchaseDate">
+          <block type="date_picker" id="mWdQ)=z=1G]*#_m}Q,{.">
+            <field name="FIELDNAME">2023-09-01</field>
+            <field name="String_Value">T23:59:59</field>
+          </block>
+        </value>
+        <value name="priceAtPurchaseDate">
+          <block type="input_field_value" id="rWhVS,@%mWpzY/`jOgVF">
+            <field name="String_Value">500</field>
+          </block>
+        </value>
+        <next>
+          <block type="optns1_contract_structure" id="DgnRegU`pDyaj;3VyC0o">
+            <statement name="PAM">
+              <block type="STK_ATTRIBUTES" id="9:CS2*vDKUrETZF4IxSc">
+                <value name="contractType">
+                  <block type="enum_contractType" id="*!K.^6Zc?|V7wztA#f^)">
+                    <field name="String_Value">STK</field>
+                  </block>
+                </value>
+                <value name="contractRole">
+                  <block type="enum_contractRole" id="/S?N!+rDY(B|d@#.qs?^">
+                    <field name="String_Value">RPA</field>
+                  </block>
+                </value>
+                <value name="contractID">
+                  <block type="input_field_value" id="S~jDX;A08o`8ah-6mom#">
+                    <field name="String_Value">OPTNS_child</field>
+                  </block>
+                </value>
+                <value name="currency">
+                  <block type="enum_currency" id="$=Tq@GlfNF{+!1tLR11M">
+                    <field name="String_Value">CHF</field>
+                  </block>
+                </value>
+                <value name="purchaseDate">
+                  <block type="date_picker" id="f2T*!`bb+zu6BD6]`_*P">
+                    <field name="FIELDNAME">2023-09-01</field>
+                    <field name="String_Value">T23:59:59</field>
+                  </block>
+                </value>
+                <value name="priceAtPurchaseDate">
+                  <block type="input_field_value" id="nqI`DE5JY,4pGG%+HUd4">
+                    <field name="String_Value">1100</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="swaps_optional4_marketValueObserved" id="8n-H0K/b8z)KDN:xTBHZ">
+                    <value name="marketValueObserved">
+                      <block type="input_field_value" id="CD|-1tZlAbm;kl0#=/Xl">
+                        <field name="String_Value">1100</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="swaps_optional6_marketObjectCode" id="lY,#Vo?}a9%BAZ:ulz:J">
+                        <value name="marketObjectCode">
+                          <block type="input_field_value" id="Cd:#4qU$LC_mCq*LJi_h">
+                            <field name="String_Value">SP500</field>
+                          </block>
+                        </value>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

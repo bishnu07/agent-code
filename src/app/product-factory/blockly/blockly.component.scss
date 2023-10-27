@@ -1,0 +1,53 @@
+/* Custom styles for the category with class "custom-category" */
+.logic_category {
+  background-color: #ffd700; /* Yellow background */
+  color: #333; /* Text color */
+  font-weight: bold; /* Bold text */
+  /* Add any other desired styles here */
+}
+
+#blocklyDiv {
+  height: 70vh;
+  .xml-button {
+    width: 15%;
+    margin: 0.5rem 0;
+  }
+}
+
+::ng-deep .blocklyToolboxDiv {
+  // border-radius: 20px;
+}
+
+.xml-button {
+  display: flex;
+  justify-content: end;
+  column-gap: 3px;
+}
+
+::ng-deep .blocklyTreeRow {
+  height: 32px;
+  line-height: 32px;
+  margin-bottom: 5px;
+  padding-right: 8px;
+  border-radius: 5px;
+  background-color: #fff;
+  white-space: nowrap;
+  cursor: pointer;
+}
+
+::ng-deep .blocklyTreeSelected {
+  .blocklyTreeLabel {
+    color: #808080;
+  }
+  background-color: #fff !important;
+}
+
+::ng-deep .blocklyTreeLabel {
+  color: #000;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+::ng-deep .blocklyToolboxDiv {
+  padding: 1rem;
+}

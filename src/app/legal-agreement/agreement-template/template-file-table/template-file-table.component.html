@@ -1,0 +1,45 @@
+<div class="card template-file">
+  <div class="card-body">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <label class="font-weight-bold">Product template file</label>
+          <!-- Show message if no templates are uploaded -->
+          <h6
+            *ngIf="contractDocs.length === 0; else contractTable"
+            class="text-danger"
+          >
+            No Template uploaded
+          </h6>
+          <!-- Table to display uploaded templates -->
+          <ng-template #contractTable>
+            <div class="table-responsive">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>File</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <!-- Loop through contractDocs to display uploaded templates -->
+                  <tr *ngFor="let doc of contractDocs">
+                    <td>{{ doc.fileName }}</td>
+                    <td>
+                      <a
+                        #document
+                        (click)="downloadDoc(doc.downloadUrl, event)"
+                      >
+                        <i class="ft-download"></i>
+                      </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

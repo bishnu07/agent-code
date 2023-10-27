@@ -1,0 +1,92 @@
+<xml xmlns="https://developers.google.com/blockly/xml">
+  <block type="PAM_ATTRIBUTES" id="?Q@|(eA@UDpcZ.gvfAgJ" x="390" y="-990">
+    <value name="contractType">
+      <block type="contract_number_value" id="vM@8_:YtAjs`}nn+L83S"></block>
+    </value>
+    <value name="contractRole">
+      <block type="enum_contractRole" id="6m5Z6W3ph1Q2gv^;Vann">
+        <field name="String_Value">RPA</field>
+      </block>
+    </value>
+    <value name="contractID">
+      <block type="input_field_value" id="i57gcE(]-0jJ@Io%f9Xw">
+        <field name="String_Value">PAM-01</field>
+      </block>
+    </value>
+    <value name="currency">
+      <block type="enum_currency" id="[?KaU:wIa(e/{nO//g%5">
+        <field name="String_Value">USD</field>
+      </block>
+    </value>
+    <value name="nominalInterestRate">
+      <block type="input_field_value" id="e-hXFEJvTK9mU1Ow0ION">
+        <field name="String_Value">0.03</field>
+      </block>
+    </value>
+    <value name="dayCountConvention">
+      <block type="enum_dayCountConvention" id="k96VFnV]=Ke5!4b4p80@">
+        <field name="String_Value">AA</field>
+      </block>
+    </value>
+    <value name="initialExchangeDate">
+      <block type="date_picker" id="MZ~:PzoiJz-QdQv!8A{T">
+        <field name="FIELDNAME">2023-08-01</field>
+        <field name="String_Value">T23:59:59</field>
+      </block>
+    </value>
+    <value name="maturityDate">
+      <block type="date_picker" id="iCR{hq(OCkc~}#sKfEEe">
+        <field name="FIELDNAME">2026-09-22</field>
+        <field name="String_Value">T23:59:59</field>
+      </block>
+    </value>
+    <value name="notionalPrincipal">
+      <block type="input_field_value" id="#9FX~KJw]BO(VaY;[1Mb">
+        <field name="String_Value">40000</field>
+      </block>
+    </value>
+    <value name="creatorID">
+      <block type="input_field_value" id="Y9#-7u~B=E/N.uK*H}?X">
+        <field name="String_Value">2490270a-fe13-41f7-bca1-ecee5920e0b3</field>
+      </block>
+    </value>
+    <value name="statusDate">
+      <block type="date_picker" id="(U=-)f2HJjG9x`F:[qK|">
+        <field name="FIELDNAME">2023-07-31</field>
+        <field name="String_Value">T23:59:59</field>
+      </block>
+    </value>
+    <value name="counterpartyID">
+      <block type="input_field_value" id="~E?4-$#Wt^zpd9;tLO]B">
+        <field name="String_Value">33cb59a5-1a69-4531-8481-694e5ca579c1</field>
+      </block>
+    </value>
+    <value name="contractDealDate">
+      <block type="date_picker" id=".k~]$~kLhR+f@jFJf$@=">
+        <field name="FIELDNAME">2023-07-31</field>
+        <field name="String_Value">T23:59:59</field>
+      </block>
+    </value>
+    <next>
+      <block type="cycleAnchorDateOfInterestPayment" id="%uCfiafbllxRLSJDlP;F">
+        <value name="cycleAnchorDateOfInterestPayment">
+          <block type="date_picker" id="^%Sn|3`FVRR~gt:VTz`{">
+            <field name="FIELDNAME">2023-09-01</field>
+            <field name="String_Value">T23:59:59</field>
+          </block>
+        </value>
+        <value name="cycleOfInterestPayment">
+          <block type="list_cycle_of_period" id="g#on}^MA1KM0Zl(1PSrr">
+            <field name="String_Value">M</field>
+            <field name="String_Value">L0</field>
+            <value name="calendar">
+              <block type="input_field_value" id="0]t}Cgt;m.[0#`w5Y@$C">
+                <field name="String_Value">1</field>
+              </block>
+            </value>
+          </block>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

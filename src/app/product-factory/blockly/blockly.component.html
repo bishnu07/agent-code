@@ -1,0 +1,334 @@
+<div class="row">
+  <div class="col-12">
+    <div class="content-header">
+      <div class="xml-button">
+        <!-- product template start-->
+        <div
+          ngbDropdown
+          class="d-inline-block"
+          placement="bottom"
+          autoClose="outside"
+        >
+          <button
+            class="btndropdown-toggle btn btn-outline-primary mr-1"
+            id="dropdownBasic1"
+            ngbDropdownToggle
+          >
+            Product templates
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+            <div ngbDropdown class="dropdown-submenu">
+              <button
+                class="dropdown-item"
+                id="dropdownBasic2"
+                ngbDropdownToggle
+              >
+                Bonds
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                <a
+                  class="dropdown-item"
+                  (click)="getDefaultTemplateOfXml('plain-vanilla')"
+                >
+                  Plain vanilla
+                </a>
+              </div>
+            </div>
+            <div ngbDropdown class="dropdown-submenu">
+              <button
+                class="dropdown-item"
+                id="dropdownBasic2"
+                ngbDropdownToggle
+              >
+                Mortgages
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic2">
+                <a class="dropdown-item" (click)="getDefaultTemplateOfXml('')">
+                  Amortizing with collateral
+                </a>
+              </div>
+            </div>
+            <div ngbDropdown class="dropdown-submenu">
+              <button
+                class="dropdown-item"
+                id="dropdownBasic3"
+                ngbDropdownToggle
+              >
+                Options
+              </button>
+              <div ngbDropdownMenu aria-labelledby="dropdownBasic3">
+                <a
+                  class="dropdown-item"
+                  (click)="getDefaultTemplateOfXml('stock-option')"
+                >
+                  Stock option
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- product template end-->
+
+        <!-- export start-->
+        <div
+          ngbDropdown
+          class="d-inline-block"
+          placement="bottom"
+          autoClose="outside"
+        >
+          <button
+            class="btndropdown-toggle btn btn-outline-primary mr-1"
+            id="dropdownBasic4"
+            ngbDropdownToggle
+          >
+            Export
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic4">
+            <div ngbDropdown class="dropdown-submenu">
+              <button class="dropdown-item" id="dropdownBasic2">
+                ACTUS contract JSON
+              </button>
+              <button class="dropdown-item" id="dropdownBasic2">
+                SolitX product JSON
+              </button>
+
+              <button class="dropdown-item" id="dropdownBasic2">
+                Document format
+              </button>
+              <button
+                class="dropdown-item"
+                id="dropdownBasic2"
+                (click)="convertBlocksToJson()"
+              >
+                Export Blockly XML
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- export end-->
+
+        <!-- import start-->
+        <div
+          ngbDropdown
+          class="d-inline-block"
+          placement="bottom"
+          autoClose="outside"
+        >
+          <button
+            class="btndropdown-toggle btn btn-outline-primary mr-1"
+            id="dropdownBasic5"
+            ngbDropdownToggle
+          >
+            Import
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic5">
+            <div ngbDropdown class="dropdown-submenu">
+              <button class="dropdown-item" id="dropdownBasic2">
+                ACTUS Contract JSON
+              </button>
+              <button class="dropdown-item" id="dropdownBasic2">
+                Import Blockly XML
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- import end-->
+
+        <!-- execute start-->
+        <div
+          ngbDropdown
+          class="d-inline-block"
+          placement="bottom"
+          autoClose="outside"
+        >
+          <button
+            class="btndropdown-toggle btn btn-outline-primary mr-1"
+            id="dropdownBasic6"
+            ngbDropdownToggle
+          >
+            Execute
+          </button>
+          <div ngbDropdownMenu aria-labelledby="dropdownBasic6">
+            <div ngbDropdown class="dropdown-submenu">
+              <button class="dropdown-item" id="dropdownBasic2">
+                Validation checks
+              </button>
+              <button class="dropdown-item" id="dropdownBasic2">
+                Generate cash flows
+              </button>
+            </div>
+          </div>
+        </div>
+        <!-- execute end-->
+      </div>
+    </div>
+  </div>
+</div>
+<section id="filter">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card p-2">
+        <!-- <div class="card-header p-2"></div> -->
+        <div class="" card-body>
+          <div id="blocklyDiv"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="blockly-xml">
+  <xml
+    id="toolbox"
+    style="display: none"
+    xmlns="https://developers.google.com/blockly/xml"
+  >
+    <category name="Financial Contracts" categorystyle="logic_category">
+      <category name="Basic Contracts" colour="#ff7721">
+        <category name="Fixed Income" colour="#b3bed4">
+          <category name="Maturities" colour="#7eaba2">
+            <category name="PAM" colour="#e5003d">
+              <block type="Basic contract"></block>
+              <!-- <block type="pam_do_statement"></block> -->
+              <block type="PAM_ATTRIBUTES"></block>
+              <block type="PAM_ATTRIBUTES_OPTIONAL1"></block>
+              <block type="PAM_ATTRIBUTES_OPTIONAL2"></block>
+              <block type="PAM_ATTRIBUTES_OPTIONAL3"></block>
+
+              <!-- <block type="set_value"></block> -->
+              <block type="cycleAnchorDateOfInterestPayment"></block>
+              <block type="cycleAnchorDateOfRateReset"></block>
+              <block type="businessDayConvention"></block>
+              <block type="endOfMonthConvention"></block>
+            </category>
+            <category name="ANN" colour="#ef985a">
+              <block type="ANN_ATTRIBUTES"></block>
+              <!-- <block type="ann_do_statement"></block> -->
+              <block type="cycleAnchorDateOfPrincipalRedemption"></block>
+              <block type="cycleAnchorDateOfInterestCalculationBase"></block>
+              <block type="ann_optional_feeRate"></block>
+              <block type="ann_optional_scalingEffect"></block>
+              <block type="ann_optional_prepaymentEffect"></block>
+              <block type="ann_optional_cycleAnchorDateOfRateReset"></block>
+              <block type="ann_optional_creditLineAmount"></block>
+              <block type="ann_optional_nextPrincipalRedemptionPayment"></block>
+              <block type="ann_optional_accruedInterest"></block>
+            </category>
+            <category name="NAM" colour="#99725a">
+              <block type="NAM_ATTRIBUTES"></block>
+              <block type="nam_businessDayConvention"></block>
+              <block type="nam_endOfMonthConvention"></block>
+              <block type="nam_cycleAnchorDateOfPrincipalRedemption"></block>
+            </category>
+            <category name="LAM" colour="#ffbf54"> </category>
+            <category name="ANX" colour="#edd4c8"> </category>
+            <category name="NAX" colour="#bf9982"> </category>
+            <category name="LAX" colour="#ffbf54"> </category>
+            <category name="CLM" colour="#edd4c8"> </category>
+            <category name="PBN" colour="#bf9982"> </category>
+          </category>
+          <category name="Non-Maturities" colour="#a70000">
+            <category name="CSH" colour="#ffbf97"> </category>
+            <category name="UMP" colour="#ffbf54">
+              <block type="UMP_ATTRIBUTES"></block>
+              <block type="ump_accruedInterest"></block>
+              <block type="ump_settlementCurrency"></block>
+              <block type="ump_cycleAnchorDateOfInterestPayment"></block>
+              <block type="ump_cycleOfInterestPayment"></block>
+            </category>
+          </category>
+        </category>
+        <category name="Index Based" colour="#009ca9">
+          <category name="STK" colour="#4c3b1e">
+            <block type="STK_ATTRIBUTES"></block>
+            <block type="stk_terminationDate"></block>
+          </category>
+          <category name="COM" colour="#ffbf54"> </category>
+        </category>
+      </category>
+      <category name="Combined contracts" colour="#ffb54f">
+        <category name="Symmetric" colour="#a72929">
+          <category name="SWAPS" colour="#3e7454">
+            <block type="swaps_contract_structure"></block>
+            <block type="swap_contracts_input"></block>
+            <block type="swaps_optional1_contractPerformance"></block>
+            <block type="swaps_optional2_terminationDate"></block>
+            <block type="swaps_optional3_purchaseDate"></block>
+            <block type="swaps_optional4_marketValueObserved"></block>
+            <block type="swaps_optional5_settlementCurrency"></block>
+            <block type="swaps_optional6_marketObjectCode"></block>
+          </category>
+          <category name="SWPPV" colour="#ffbf54"> </category>
+          <category name="FXOUT" colour="#edd4c8"> </category>
+          <category name="FUTUR" colour="#bf9982"> </category>
+        </category>
+        <category name="Options" colour="#a96148">
+          <category name="Plain Vanilla" colour="#9435eb">
+            <category name="OPTNS" colour="#4c392d">
+              <block type="optns1_contract_structure"></block>
+              <block type="optns2_contract_structure"></block>
+              <block type="optns3_contract_structure"></block>
+              <block type="optns4_contractPerformance"></block>
+              <block type="optns5_exerciseDate"></block>
+              <block type="optns6_optionStrike2"></block>
+
+              <block type="option_contracts_input"></block>
+            </category>
+            <category name="CAPFL" colour="#ffbf54"> </category>
+            <category name="BNDCP" colour="#edd4c8"> </category>
+            <category name="BNDWR" colour="#bf9982"> </category>
+          </category>
+          <category name="Exotic" colour="#f3366c">
+            <category name="EXOTI" colour="#bf9982"> </category>
+          </category>
+        </category>
+        <category name="Securitization" colour="#b87333">
+          <category name="Credit" colour="#3e6deb">
+            <category name="CDSWP" colour="#ffbf97"> </category>
+            <category name="TRSWP" colour="#ffbf54"> </category>
+            <category name="CLNTE" colour="#edd4c8"> </category>
+          </category>
+          <category name="Market" colour="#ffb8c2">
+            <category name="SCRMR" colour="#edd4c8"> </category>
+            <category name="SCRCR" colour="#edd4c8"> </category>
+          </category>
+        </category>
+      </category>
+    </category>
+    <sep></sep>
+    <category name="Credit Enhancement" colour="#ffb53f">
+      <category name="CEG" colour="#ffef10"> </category>
+      <category name="CEC" colour="#ffbc10"> </category>
+      <category name="MAR" colour="#ffbc99"> </category>
+      <category name="REP" colour="#bf5421"> </category>
+    </category>
+    <sep></sep>
+    <category name="Parameters" colour="#333f56">
+      <category name="List" colour="#666f80">
+        <block type="enum_contractRole"></block>
+        <block type="enum_businessDayConvention"></block>
+        <block type="enum_dayCountConvention"></block>
+        <block type="enum_endOfMonthConvention"></block>
+        <block type="enum_contractType"></block>
+        <block type="enum_contractPerformance"></block>
+        <block type="enum_currency"></block>
+        <block type="list_cycle_of_period"></block>
+      </category>
+      <category name="Input fields" colour="#666f80">
+        <!-- <button
+          text="Create variable..."
+          callbackKey="myFirstButtonPressed"
+        ></button> -->
+        <block type="date_picker"></block>
+        <block type="ANN_CONTRACT"></block>
+        <block type="contract_number_value"></block>
+        <block type="input_field_value"></block>
+        <block type="input_field_text"></block>
+      </category>
+      <category name="Functions" colour="#666f80"> </category>
+      <!-- <block type="field_variable1"></block> -->
+    </category>
+    <sep></sep>
+    <!-- <category name="Load" id="default_block"> </category> -->
+  </xml>
+</div>

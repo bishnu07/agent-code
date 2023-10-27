@@ -1,0 +1,400 @@
+<section id="striped-row-form-layouts">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <form
+          #userForm="ngForm"
+          (ngSubmit)="onSubmit(userForm.value)"
+          id="clientForm"
+        >
+          <div class="form-body">
+            <div class="card-header">
+              <h4 class="card-title">
+                <i class="ft-user"></i> Update Client
+                <button
+                  [title]="userForm.invalid ? 'Please Correct Errors' : ''"
+                  type="submit"
+                  class="btn btn-primary mr-2"
+                  style="float: right"
+                >
+                  Update
+                </button>
+              </h4>
+            </div>
+
+            <div class="card-body">
+              <div class="container">
+                <div class="form-group edit-prof">
+                  <!-- PROFILE PICTURE PREVIEW -->
+                  <div class="profimg">
+                    <img
+                      [src]="imgUrl ?? defaultImageUrlPath"
+                      style="cursor: pointer"
+                      (click)="selectPicture($event)"
+                    />
+
+                    <!-- <img
+                      *ngIf="!filePreviewAvailable && !filePreview"
+                      [src]="defaultImageUrlPath"
+                    />
+                    <img
+                      *ngIf="filePreview"
+                      [src]="sanitize(filePreview)"
+                      style="cursor: pointer"
+                    /> -->
+                    <div class="image_overlay" *ngIf="filePreviewAvailable">
+                      <div class="button_text" (click)="viewImage()">
+                        <a style="cursor: pointer" id="myBtn">View</a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="file-preview d-flex justify-content-between">
+                    <div class="input-label">
+                      <label>PROFILE PHOTO</label>
+                      <input
+                        #profilePicInput
+                        accept=".png,.jpg,.jpeg"
+                        type="file"
+                        name="image"
+                        (change)="selectPicture($event)"
+                        class="form-control"
+                        ngModel
+                      />
+                    </div>
+                    <div class="align-self-end">
+                      <button
+                        type="button"
+                        class="form-control btn btn-primary mr-2"
+                        (click)="upload('profilePicture')"
+                      >
+                        Upload
+                        <i>{{ profilePictureFileSize }}</i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="danger d-block" *ngIf="photoSizeExceeded">
+                    <span>Please upload a file smaller than 500 KB.</span>
+                    <span></span>
+                  </div>
+
+                  <div class="detail font-w-light">
+                    <label>Form Label</label>
+                  </div>
+
+                  <select
+                    class="form-control"
+                    [(ngModel)]="this.profileService.profileId.profileFormId"
+                    name="FormID"
+                  >
+                    <option
+                      selected
+                      *ngFor="let profile of profilelist"
+                      value="{{ profile['formID'] }}"
+                    >
+                      {{ profile["formlabel"] }}
+                    </option>
+                  </select>
+
+                  <div *ngIf="profiles && profiles[0].Type">
+                    <div
+                      *ngFor="let profiles of profiles; let i = index"
+                      [ngSwitch]="profiles.Type"
+                    >
+                      <div *ngIf="i != 0" class="header">
+                        <div class="detail font-w-light">
+                          <label
+                            *ngIf="
+                              profiles['Type'] !== 'Zoop-OKYC-AadhaarID' &&
+                              profiles['Type'] !== 'Zoop-OKYC-OTP' &&
+                              profiles['Type'] !== 'Shuftipro-AMLI-Name' &&
+                              profiles['Type'] !== 'Shuftipro-AMLI-DOB'
+                            "
+                            >{{ profiles["Label"] }}</label
+                          >
+                        </div>
+
+                        <input
+                          *ngSwitchCase="'Varchar'"
+                          type="text"
+                          [readonly]="
+                            profiles.Label == 'Age' ? 'readonly' : null
+                          "
+                          class="form-control"
+                          name="{{ profiles['Label'] }}"
+                          [(ngModel)]="profile[profiles['Label']]"
+                          [ngClass]="{ submitted: userForm.submitted }"
+                        />
+
+                        <input
+                          *ngSwitchCase="'Date'"
+                          ngbDatepicker
+                          #date1="ngbDatepicker"
+                          (click)="date1.toggle()"
+                          (change)="
+                            profiles['Label'] == 'Date of Birth'
+                              ? dobChange($event)
+                              : null
+                          "
+                          class="form-control"
+                          name="{{ profiles['Label'] }}"
+                          [class.ng-invalid]="
+                            profiles['Label'] == 'Date of Birth' && invalidDate
+                          "
+                          [(ngModel)]="profile[profiles['Label']]"
+                          [ngClass]="{ submitted: userForm.submitted }"
+                        />
+
+                        <p
+                          *ngIf="
+                            profiles['Label'] == 'Date of Birth' && invalidDate
+                          "
+                          style="
+                            color: rgba(255, 0, 0, 0.637);
+                            font-size: 0.8em;
+                            margin: 0;
+                          "
+                        >
+                          You cannot enter a date in the future!.
+                        </p>
+                        <input
+                          *ngIf="
+                            profiles.Type == 'Number' &&
+                            profiles.Label == 'National ID'
+                          "
+                          type="number"
+                          [class.has-error]="
+                            national_id ? national_id.length != 6 : ''
+                          "
+                          id="12"
+                          #nationalID="ngModel"
+                          (input)="checkNationalId($event)"
+                          class="form-control na_id"
+                          name="{{ profiles['Label'] }}"
+                          [(ngModel)]="profile[profiles['Label']]"
+                          [ngClass]="{ submitted: userForm.submitted }"
+                        />
+                        <input
+                          *ngIf="
+                            profiles.Type == 'Number' &&
+                            profiles.Label == 'Pincode'
+                          "
+                          (input)="checkPincode($event)"
+                          maxlength="10"
+                          id="6"
+                          type="number"
+                          min="0"
+                          class="form-control pin"
+                          name="{{ profiles['Label'] }}"
+                          [(ngModel)]="profile[profiles['Label']]"
+                          [ngClass]="{ submitted: userForm.submitted }"
+                        />
+
+                        <!-- <input
+                          *ngIf="
+                            profiles.Type == 'Phone' &&
+                            profiles.Label != 'Pincode'
+                          "
+                          type="text"
+                          class="form-control"
+                          name="{{ profiles['Label'] }}"
+                          [(ngModel)]="profile[profiles['Label']]"
+                          [ngClass]="{ submitted: userForm.submitted }"
+                        />
+                        <div *ngIf="profiles.Type == 'Phone'">
+                          <small class="danger"
+                            ><sup>*</sup>Please enter the mobile number with
+                            country code</small
+                          >
+                        </div> -->
+
+                        <input
+                          *ngSwitchCase="'Email'"
+                          [ngClass]="{ submitted: userForm.submitted }"
+                          type="email"
+                          class="form-control"
+                          id="email"
+                          name="{{ profiles['Label'] }}"
+                          [(ngModel)]="profile[profiles['Label']]"
+                          email
+                          [ngClass]="{ submitted: userForm.submitted }"
+                        />
+
+                        <input
+                          *ngIf="profiles.Type == 'Phone'"
+                          type="text"
+                          ng2TelInput
+                          class="telInput form-control"
+                          name="{{ profiles['Label'] }}"
+                          [(ngModel)]="profile[profiles['Label']]"
+                          [ng2TelInputOptions]="{
+                            autoHideDialCode: false,
+                            initialCountry: 'in',
+                            separateDialCode: true
+                          }"
+                          (intlTelInputObject)="telInputObject($event)"
+                          (countryChange)="onCountryChange($event)"
+                        />
+
+                        <select
+                          *ngSwitchCase="'List'"
+                          class="form-control"
+                          name="{{ profiles.Label }}"
+                          [(ngModel)]="profile[profiles['Label']]"
+                          [ngClass]="{ submitted: userForm.submitted }"
+                        >
+                          <option *ngFor="let Dropdown of profiles.Value">
+                            {{ Dropdown }}
+                          </option>
+                        </select>
+
+                        <!-- <div
+                          *ngIf="
+                            profiles.Type == 'Branch' &&
+                            profiles.Label == 'Hierarchy' &&
+                            simpleSelected.current_branch_id != 'null'
+                          "
+                        >
+                          <i class="caret pull-right"></i>
+                          <input
+                            type="text"
+                            class="form-control"
+                            autocomplete="off"
+                            [(ngModel)]="hierarchyName"
+                            [ngClass]="{ submitted: userForm.submitted }"
+                            required
+                            value=""
+                            name="Hierarchy"
+                            (keyup)="filterBranch($event.target.value)"
+                            placeholder="Hierarchy (enter at least 4 characters)"
+                          />
+                          <div
+                            id="myDropdown"
+                            class="dropdown-content"
+                            *ngIf="showBranch"
+                            style="max-width: 100%"
+                          >
+                            <div *ngFor="let branch of dropDownColumns">
+                              <a
+                                (click)="
+                                  branchDeselect(
+                                    branch.branchid,
+                                    branch.branch_name
+                                  )
+                                "
+                                >{{ branch.branch_name }}</a
+                              >
+                            </div>
+                          </div>
+                        </div> -->
+
+                        <ng-container
+                          *ngIf="
+                            profiles.Type == 'Branch' &&
+                            profiles.Label == 'Hierarchy' &&
+                            simpleSelected.current_branch_id != 'null'
+                          "
+                        >
+                          <app-infinite-scroll
+                            [searchResults]="searchResults"
+                            (branchEvent)="selectedBranch($event)"
+                            (scrollEvent)="scrollEvent($event)"
+                          >
+                            <div class="input-group-append">
+                              <span
+                                class="input-group-text fa fa-search search-icon"
+                              >
+                              </span>
+                            </div>
+                            <input
+                              type="text"
+                              class="form-control"
+                              [placeholder]="profiles.Label"
+                              autocomplete="off"
+                              [(ngModel)]="hierarchyName"
+                              name="Hierarchy"
+                              (input)="onSearch($event.target.value)"
+                            />
+                          </app-infinite-scroll>
+                        </ng-container>
+
+                        <input
+                          *ngSwitchCase="'Image'"
+                          accept="image/*,.pdf,.doc,.docx"
+                          type="file"
+                          name="image"
+                          (change)="selectFiles($event, profiles['Label'])"
+                          class="form-control"
+                          name="{{ profiles['Label'] }}"
+                          value=""
+                          [ngClass]="{ submitted: userForm.submitted }"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="document-file position-relative">
+                    <div class="d-flex justify-content-between">
+                      <div class="input-label">
+                        <label *ngIf="showFileUpload">DOCUMENTS</label>
+                        <input
+                          #personalInput
+                          *ngIf="showFileUpload"
+                          accept=".pdf,.png,.jpg,.jpeg"
+                          type="file"
+                          name="image"
+                          (change)="selectFile($event, 'documents')"
+                          class="form-control height"
+                        />
+                      </div>
+                      <div class="align-self-end">
+                        <button
+                          type="button"
+                          class="form-control btn btn-primary mr-2"
+                          (click)="upload('personal')"
+                        >
+                          Upload
+                          <i>{{ documentFileSize }}</i>
+                        </button>
+                      </div>
+                    </div>
+                    <div
+                      class="danger d-block position-absolute"
+                      *ngIf="fileSizeExceeded"
+                    >
+                      <h6>Please upload a file smaller than 500 KB.</h6>
+                    </div>
+
+                    <div class="note position-absolute">
+                      <h6>
+                        <strong>Note : </strong>Upload only JPG, JPEG, PDF, and
+                        PNG files that are under 500 KB.
+                      </h6>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ng-template #view let-c="close" let-d="dismiss">
+  <div id="myModal" class="modal1">
+    <div class="x_close">
+      <span class="close ft-close">X</span>
+    </div>
+    <div class="shadow-top">
+      <div class="file-detail">
+        <div class="file-name">harish.png</div>
+        <div class="file-size">120kb</div>
+      </div>
+    </div>
+    <div class="image1">
+      <img [src]="defaultImageUrlPath" alt="" />
+    </div>
+    <div class="shadow-bottom"></div>
+  </div>
+</ng-template>

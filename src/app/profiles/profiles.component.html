@@ -1,0 +1,183 @@
+<!--built-in column filter types Starts-->
+<section id="filter">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">
+            <i class="ft-users">&nbsp;&nbsp;</i>Clients
+            <button
+              _ngcontent-c20=""
+              class="btn btn-primary mr-2"
+              style="float: right"
+              routerLink="/client/create-client"
+              matTooltip="Create profile"
+            >
+              Create
+            </button>
+          </h4>
+
+          <!-- <app-custom-dropdown></app-custom-dropdown> -->
+
+          <!-- <ngb-datepicker [minDate]="{year: 2021, month: 1, day: 1}" withSeconds
+                        [maxDate]="{year: 2048, month: 12, day: 31}" [markDisabled]="isDisabled">
+                    </ngb-datepicker> -->
+        </div>
+        <div class="card-body">
+          <!-- <form #userForm="ngForm" (ngSubmit)="onSubmitFilter(userForm.value)">
+            <div class="row filters">
+              <div class="columns text-center edit-prof">
+                <tree-select
+                  class="scrollhr"
+                  name="Hierarchy"
+                  [(items)]="loginService.hierarchy"
+                  idField="current_branch_id"
+                  textField="branch_name"
+                  placeholder="Hierarchy"
+                  childrenField="children"
+                  [(ngModel)]="simpleSelected"
+                  required="false"
+                  #simpleSelect="ngModel"
+                  minlength="3"
+                  maxlength="4"
+                  [filterPlaceholder]="FilterPlaceholder"
+                  [allowFilter]="ShowFilter"
+                  [allowParentSelection]="AllowParentSelection"
+                  [restructureWhenChildSameName]="RestructureWhenChildSameName"
+                  [maxVisibleItemCount]="MaxDisplayed"
+                  ><span style="float: right">&#9662;</span>
+                </tree-select>
+              </div>
+
+              <div class="columns text-center">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="NationalID"
+                  ngModel
+                  placeholder="National ID"
+                />
+              </div>
+              <div class="columns text-center">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="Identifier"
+                  ngModel
+                  placeholder="Client ID"
+                />
+              </div>
+              <div class="columns text-center">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="mobileNumber"
+                  ngModel
+                  placeholder="Mobile Number"
+                />
+              </div>
+              <div class="columns text-center">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="Name"
+                  ngModel
+                  placeholder="Client Name"
+                />
+              </div>
+              <div class="columns btns text-center">
+                <button type="submit" class="btn text-white btn-demo btn-tn">
+                  Filter
+                </button>
+              </div>
+            </div>
+          </form> -->
+          <form #userForm="ngForm" (ngSubmit)="onSubmitFilter(userForm.value)">
+            <div class="row filters">
+              <div class="col-md-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="NationalID"
+                  ngModel
+                  placeholder="National ID"
+                />
+              </div>
+              <div class="col-md-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="Identifier"
+                  ngModel
+                  placeholder="Client ID"
+                />
+              </div>
+              <div class="col-md-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="mobileNumber"
+                  ngModel
+                  placeholder="Mobile Number"
+                />
+              </div>
+              <div class="col-md-2">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="Name"
+                  ngModel
+                  placeholder="Client Name"
+                />
+              </div>
+              <div class="col-md-2">
+                <!-- Add your tree-select component here -->
+                <!-- <input
+                  type="text"
+                  class="form-control"
+                  name="Name"
+                  ngModel
+                  placeholder="Client Name"
+                /> -->
+              </div>
+              <div class="col-md-2">
+                <button type="submit" class="btn btn-primary mr-2">
+                  Filter
+                </button>
+              </div>
+            </div>
+          </form>
+
+          <div class="profilesPage ng-table">
+            <ng2-smart-table
+              *ngIf="smartTableLoadData.length > 0"
+              [settings]="setting"
+              [source]="smartTableLoadData"
+              (userRowSelect)="onUserRowSelect($event)"
+            ></ng2-smart-table>
+            <!-- <angular2-smart-table
+              [settings]="setting"
+              [source]="smartTableLoadData"
+            ></angular2-smart-table> -->
+            <div class="pagination pt-2">
+              <button
+                class="btn btn-page prev"
+                (click)="pageTurn('prev')"
+                [disabled]="pgNo == 0"
+              >
+                <
+              </button>
+              <button
+                class="btn btn-page next"
+                (click)="pageTurn('next')"
+                [disabled]="tableEnd"
+              >
+                >
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

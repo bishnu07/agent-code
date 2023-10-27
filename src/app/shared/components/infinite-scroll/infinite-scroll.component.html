@@ -1,0 +1,60 @@
+<!-- <div class="container mt-4">
+  <div class="input-group">
+    <input
+      type="text"
+      class="form-control"
+      placeholder="Search"
+      (input)="onSearch($event.target.value)"
+    />
+  </div>
+
+  <div
+    id="myDropdown"
+    #drp
+    class="dropdown-content"
+    (scroll)="onScroll($event)"
+  >
+    <div *ngFor="let branch of searchResults" id="dropdownlist">
+      <a (click)="branchDeselect(branch.branchid, branch.branch_name)">{{
+        branch.branch_name
+      }}</a>
+    </div>
+  </div>
+</div> -->
+
+<div class="container p-0 m-0">
+  <div class="input-group">
+    <ng-content></ng-content>
+  </div>
+
+  <div class="dropdown">
+    <div
+      id="myDropdown"
+      #drp
+      class="dropdown-content"
+      (scroll)="onScroll($event)"
+    >
+      <input
+        *ngIf="filteredResults?.length > 0"
+        type="text"
+        [(ngModel)]="searchTerm"
+        class="form-control"
+        (input)="filterResults()"
+        placeholder="Search..."
+      />
+      <div
+        *ngFor="let branch of searchResults"
+        id="dropdownlist"
+        [@fadeInOut]="true"
+      >
+        <a (click)="branchSelect(branch.branchid, branch.branch_name)">{{
+          branch.branch_name
+        }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <ng-container *ngIf="loading">
+      <div class="process-loader"></div>
+    </ng-container> -->

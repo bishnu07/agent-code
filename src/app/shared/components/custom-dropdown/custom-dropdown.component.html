@@ -1,0 +1,84 @@
+<!-- <div id="dropdown-container">
+  <div class="dropdown" *ngFor="let menuItem of menuItems">
+    <button class="dropbtn">{{ menuItem.name }}</button>
+    <div class="dropdown-content" *ngIf="menuItem.children">
+      <app-custom-dropdown
+        [menuItems]="menuItem.children"
+      ></app-custom-dropdown>
+    </div>
+  </div>
+</div> -->
+
+<div
+  ngbDropdown
+  class="d-inline-block"
+  placement="bottom"
+  autoClose="outside"
+  (shown)="isDropdownOpen = true"
+  (hidden)="isDropdownOpen = false"
+  [autoClose]="true"
+>
+  <button
+    class="btndropdown-toggle btn btn-outline-primary mr-1"
+    id="dropdownBasic4"
+    ngbDropdownToggle
+    (click)="toggleDropdown()"
+  >
+    Export
+    <span *ngIf="isDropdownOpen" class="arrow">&#9660;</span>
+    <span *ngIf="!isDropdownOpen" class="arrow">&#9654;</span>
+  </button>
+  <div ngbDropdownMenu aria-labelledby="dropdownBasic4">
+    <ng-template #recursiveMenu let-items>
+      <div *ngFor="let item of items">
+        <div *ngIf="item.children">
+          <!-- <div ngbDropdown class="dropdown-submenu">
+            <span class="dropdown-item" ngbDropdownToggle>
+              {{ item.name }}
+            </span>
+            <div ngbDropdownMenu>
+              <ng-container
+                *ngTemplateOutlet="
+                  recursiveMenu;
+                  context: { $implicit: item.children }
+                "
+              ></ng-container>
+            </div>
+          </div> -->
+          <div
+            ngbDropdown
+            class="dropdown-submenu"
+            (mouseenter)="onMouseEnter($event)"
+            (click)="onMenuItemClick($event)"
+          >
+            <button class="dropdown-item" ngbDropdownToggle [disabled]="true">
+              {{ item.name }}
+            </button>
+            <div
+              ngbDropdownMenu
+              #dpMenu
+              [isOpen]="isSubmenuOpen"
+              style="left: 100%"
+            >
+              <ng-container
+                *ngTemplateOutlet="
+                  recursiveMenu;
+                  context: { $implicit: item.children }
+                "
+              ></ng-container>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="!item.children">
+          <button class="dropdown-item" id="dropdownBasic2">
+            {{ item.name }}
+          </button>
+        </div>
+      </div>
+    </ng-template>
+
+    <ng-container
+      *ngTemplateOutlet="recursiveMenu; context: { $implicit: menuItems }"
+    ></ng-container>
+  </div>
+</div>

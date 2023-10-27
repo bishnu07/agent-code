@@ -1,0 +1,106 @@
+<section id="filter">
+  <div class="row">
+    <!-- Column for Agreement Template Card -->
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-body">
+          <!-- Agreement Template Card Header -->
+          <div class="card-header">
+            <h4 class="card-title">
+              <i class="ft-file">&nbsp;</i>Legal agreements
+              <br />
+              <!-- Save Button -->
+              <button
+                type="button"
+                class="btn btn-primary mr-2 float-right"
+                (click)="onSubmit(templateForm.value)"
+                [disabled]="templateForm.invalid || showSaveButton"
+              >
+                Save
+              </button>
+            </h4>
+          </div>
+
+          <!-- Form Body -->
+          <div class="form-body" style="margin-top: 60px">
+            <form #templateForm="ngForm">
+              <div class="row">
+                <!-- Column for Product Template File Input -->
+                <div class="col-sm-6">
+                  <div class="form-group input-group-sm card">
+                    <div class="card-body">
+                      <label for="inputFirstName"
+                        >Choose product template file</label
+                      >
+                      <!-- <input type="file" class="form-control" name="file" required  (change)="onFileChange($event)"> -->
+                      <input
+                        type="file"
+                        class="form-control"
+                        name="file"
+                        accept=".doc,.docx"
+                        ngModel
+                        (change)="onFileChange($event)"
+                      />
+
+                      <div class="template-file mt-4">
+                        <!-- Card to display uploaded templates -->
+                        <app-template-file-table
+                          [contractDocs]="contractDocs"
+                        ></app-template-file-table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Column for Product Category and Product Name Dropdowns -->
+                <div class="col-sm-6">
+                  <div class="form-group card">
+                    <div class="card-body">
+                      <div>
+                        <label>Product category</label>
+                        <div style="height: 80px">
+                          <select
+                            class="form-control"
+                            name="ProductCategory"
+                            ngModel
+                            (change)="onChangeProductCategory($event)"
+                          >
+                            <option value="">--select--</option>
+                            <!-- Loop through productCategoryList to display options -->
+                            <option
+                              *ngFor="let category of productCategoryList"
+                              [value]="category"
+                            >
+                              {{ category }}
+                            </option>
+                          </select>
+                        </div>
+                        <label>Product name</label>
+                        <div style="height: 200px">
+                          <select
+                            class="form-control"
+                            name="ProductIdentifier"
+                            ngModel
+                            (change)="onChangeProductName($event)"
+                          >
+                            <option value="">--select--</option>
+                            <!-- Loop through productlist to display options -->
+                            <option
+                              *ngFor="let product of productNames"
+                              [value]="product.id"
+                            >
+                              {{ product.ProductIdentifier }}
+                            </option>
+                          </select>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
